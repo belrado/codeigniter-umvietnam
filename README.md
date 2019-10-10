@@ -9,6 +9,4 @@ https://umvietnam.com
 
 umvietnam 디자인 제외 전체 코딩
 
-반응형 Html, Css 코딩작업
-Codeigniter - php프로그램 코딩작업
-MariaDB - 메뉴, 회원가입, 설명회등록예약, 게시판, 관리자 등등... DB작업
+반응형 html, css, jquery, php (Codeigniter), DB
