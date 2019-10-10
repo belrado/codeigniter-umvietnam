@@ -1,0 +1,22 @@
+# I recommend you remove `IfModule`. Because if you need mod_rewrite,
+# you don't need `IfModule`. If you don't need it, you don't need this file
+# at all.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^www.umvietnam.com [NC]
+RewriteRule ^(.*)$ https://umvietnam.com/$1 [L,R=301]
+
+#RewriteCond %{REQUEST_URI} /package.json|/package-lock.json [NC]
+#RewriteRule .* http://umvietnam.com/pagenotfound [R=302,L]
+
+#RewriteCond %{REMOTE_HOST} !^(112.223.248.83|123.212.43.231|61.97.204.197)$
+#RewriteCond %{REQUEST_URI} !/comingsoon [NC]
+#RewriteRule .* https://umvietnam.com/comingsoon [R=302,L]
+
+RewriteCond $1 !^(index\.php|captcha|data|include|uploads|js|assets|robots\.txt|umvsitemap\.xml)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.php/$1 [L]
+</IfModule>
