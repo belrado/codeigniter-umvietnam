@@ -1,0 +1,3 @@
+/* ie7 에서 배경이 투명이면 over영역이 안잡힘 */
+#global-nav .sub-nav{background:#fff}
+#psu-main-slide .main-girl01 #testprep-subject-list{display:none !important}

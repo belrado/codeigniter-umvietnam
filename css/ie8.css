@@ -1,0 +1,44 @@
+/* sub nav 2뎁스, 3뎁스 */
+.header-wrap .home-subnav{left:0}
+/* main */
+.mainJs-slickjs .slide-content-layer{top:20%}
+.mainJs-slickjs .text-box-layer .text-box{top:120px}
+.main-presentation-wrap .presentation-box .inner-box{position:relative; top:20px}
+.main-google-map iframe{display:none}
+.btn-opacity,
+.btn-boder-rect{color:#000 !important; background:#fff !important}
+.btn-opacity .bg-white{display:none;}
+.page-subheader .page-title-box{position:relative; left:0; top:0}
+.page-subheader .page-title{padding:105px 0 0 0}
+.main-slide-list .text-box,
+.main-slide-list .is_animate .text-box{opacity:0}
+.main-slide-list .text-box .inner-box{top:20%; left:9%}
+.psu-main-slide-wrap .btntype2 a:hover{background-image:none}
+.main-slide-list .main-slide-kakao .kakao-link{
+	padding:0 35px 0 45px;
+	background:url(/assets/img/ico_kakao_logo_won.png) no-repeat 2px 1px;
+}
+.main-psuedu-branch{background-attachment:scroll}
+.main-slide-list .kakao-search{top:50px}
+.main-psunews-sec .main-psunews-list>li{opacity:1}
+.teacher-list-sec .teacher-card .exp-sec{display:none}
+.teacher-list-sec .teacher-card:hover .exp-sec{display:block}
+.teacher-list-sec .teacher-card:hover .front-txt{display:none}
+.teacher-list-sec .teacher-card:hover img{}
+@media only screen and (min-width: 960px) and (max-width: 1239px){
+	#global-nav>li>a{padding:0 10px 0 0}
+}
+@media only screen and (max-width: 959px){
+	#global-nav-sec.mobile-show .global-nav-mobile-box{
+		left:0;
+	}
+	#global-nav-sec #iscroll-global-nav{
+		width:350px; height:100%; position:fixed; left:-100%; top:0; padding:0 0 30px 0; z-index:310; background:#fff;
+	}
+	#global-nav-sec .nonejs#iscroll-global-nav #global-nav{padding:0}
+	#global-nav-sec .mobile-topnav-sns{padding-top:93px}
+	#global-nav-sec .global-nav-mobile-box{
+		height:100%; overflow-y:auto
+	}
+	#global-nav>li>a .menu-name{padding:16px 0 0 0}
+}

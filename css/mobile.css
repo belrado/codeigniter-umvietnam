@@ -1,0 +1,7 @@
+input {
+   -webkit-border-radius: 0;
+}
+@media only screen and (max-width: 479px){
+	.psu-main-slide-wrap .mainJSnextBtn{display:none}
+	.psu-main-slide-wrap .mainJSprevBtn{display:none}
+}

@@ -1,0 +1,23 @@
+.loading-bg{display:none}
+.jsgooglemap{display:none}
+.stem-bgimgtxt-box .img-logo{position:static}
+.aboutus-info-sec{top:50px}
+.home-onepage-jssec .description{position:static; width:100%; padding:50px 0}
+.bbs-wrapper .bbs_card_list .list-img{height:200px}
+.bbs_card_list .list-subject{height:50px; }
+.bbs_gallery_list> li a{height:190px; overflow:hidden}
+.bbs_gallery_list.load_opacity>li,
+.bbs_card_list.load_opacity>li{opacity:1}
+.open-popup-event{display:none}
+.page-subheader .page-title,
+.page-subheader .page-sub-title{transform:translateY(0); opacity:1}
+.page-subheader .page-subheader-bg{transform:scale(1)}
+.psu-branch-sec .branch-box{opacity:1 !important; transform:translate(0, 0) !important}
+.header-wrap .home-subnav{
+	opacity:0;
+    -ms-transition:opacity .4s;
+    -webkit-transition:opacity .4s;
+    -o-transition:opacity .4s;
+	transition:opacity .4s;
+}
+.header-wrap .home-nav>li:hover .home-subnav{height:auto; opacity:1}

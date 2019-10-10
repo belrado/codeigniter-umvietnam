@@ -1,0 +1,9 @@
+.bbs_gallery_list{overflow:hidden}
+.bbs_gallery_list>li{position:relative !important; left:0 !important; top:0 !important}
+#contents .staff-list li{position:relative !important; left:0 !important; top:0 !important}
+.main-slide-list .is_animate .bgbox{
+	-ms-transform:scale(1);
+	-webkit-transform:scale(1);
+	transform:scale(1); 
+}
+.main-slide-list .is_animate .text-box{opacity:0}
