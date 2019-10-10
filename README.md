@@ -10,3 +10,10 @@ https://umvietnam.com
 umvietnam 디자인 제외 전체 코딩
 
 반응형 html, css, jquery, php (Codeigniter), DB
+
+
+-----------------------------------------------------------
+
+
+http://psuedu.org
+http://mediprep.co.kr
