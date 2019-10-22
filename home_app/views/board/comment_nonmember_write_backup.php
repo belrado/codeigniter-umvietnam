@@ -29,7 +29,7 @@
 				<strong class="blind">글자 수 제한</strong>
 				<span class="limit-txtlength" id="limit-txtlength">0/300</span>
 			</div>
-			<?if(empty($c_readonly)) : ?>
+			<?php if(empty($c_readonly)) : ?>
 			<div class="comment-submit"><input type="submit" value="댓글입력" /></div>
 			<?php endif ?>
 		</form>
