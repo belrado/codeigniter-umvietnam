@@ -1,16 +1,19 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Qna extends MY_Controller{
+class Qna extends MY_Controller
+{
 	private $de_user_type = null;
 	private $security_lv1 = 8;
 	private $security_lv2 = 9;
 	public $super_check = false;
-	public function __construct(){
+
+	public function __construct()
+	{
 		parent::__construct();
 		$this->de_user_type = $this->encryption->decrypt($this->session->userdata('user_type'));
 		// 관리자인지 확인
 		$this->_check_security_master($this->de_user_type, $this->encryption->decrypt($this->session->userdata('user_id')));
-		if($this->de_user_type === HOME_PREFIX."superMaster"){
+		if ($this->de_user_type === HOME_PREFIX."superMaster"){
 			$this->super_check = true;
 		}
 		$this->load->helper('form');
@@ -18,13 +21,16 @@ class Qna extends MY_Controller{
 		$this->load->model('board_model');
 
 	}
-	public function index(){
+	public function index()
+	{
 		redirect(site_url().'homeAdm/qna/list', 'location', 302);
 	}
-	public function bbs_update(){
+	public function bbs_update()
+	{
 
 	}
-	public function list($page=1){
+	public function list($page=1)
+	{
 		$cate 			= 'all';
 		$bbs_table 		= 'qna';
 		// 검색
@@ -59,14 +65,15 @@ class Qna extends MY_Controller{
 		ob_end_clean();
 		$this->getPageLayout('qna_list', $data);
 	}
-	public function view($bbs_id=''){
+	public function view($bbs_id='')
+	{
 		$result = $this->board_model->get_write_board_user('qna', $bbs_id);
-		if(!is_numeric($bbs_id) || !$result){
+		if (!is_numeric($bbs_id) || !$result) {
 			$this->session->set_flashdata('message', '게시글이 없습니다.');
 			redirect(site_url().'homeAdm/qna');
-		}else{
-			if($result[0]->bbs_extra1 != 'read' || $result[0]->bbs_extra1 != 'done'){
-				if(!$this->board_model->put_extra1_column('qna', $result[0]->bbs_id, 'read')){
+		} else {
+			if ($result[0]->bbs_extra1 != 'read' || $result[0]->bbs_extra1 != 'done') {
+				if (!$this->board_model->put_extra1_column('qna', $result[0]->bbs_id, 'read')) {
 					return false;
 				}
 			}
@@ -80,22 +87,23 @@ class Qna extends MY_Controller{
 		}
 	}
 	// ckeditor 이미지파일업로드
-	public function upload_imgfile_ckeditor(){
+	public function upload_imgfile_ckeditor()
+	{
 		$config['upload_path'] = './assets/img/ckeditor/qna';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size'] = '1024';
 		$config['encrypt_name'] = TRUE;
 		$this->load->library('upload', $config);
-		if(!is_dir($config['upload_path'])){
+		if (!is_dir($config['upload_path'])) {
 			@mkdir($config['upload_path'], 0777, true);
 		}
-		if(! $this->upload->do_upload('upload')){
+		if (! $this->upload->do_upload('upload')) {
 			$error = $this->upload->display_errors('','');
 			echo "<script>alert('".$error."'); </script>";
 			$this->callback_ckeditor_upload_csrf();
 			echo $error;
 			return false;
-		}else{
+		} else {
 			$CHEditorFuncNum = $this->input->get('CKEditorFuncNum');
 			$data = $this->upload->data(); //array('upload_data'=>$this->upload->Data());
 			$filename = $data['file_name'];
@@ -114,12 +122,13 @@ class Qna extends MY_Controller{
 		}
 	}
 	// 관리자 페이지 셋팅
-	private function getPageLayout($page, $data, $another_path=false){
+	private function getPageLayout($page, $data, $another_path=false)
+	{
 		$data['check_adm_lv'] = $this->session->userdata('user_level');
 		$this->load->view('adm/header', $data);
-		if($another_path){
+		if ($another_path) {
 			$this->load->view($page, $data);
-		}else{
+		} else {
 			$this->load->view('adm/'.$page, $data);
 		}
 		$this->load->view('adm/footer', $data);

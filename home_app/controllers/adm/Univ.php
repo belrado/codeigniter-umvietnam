@@ -1,14 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Univ extends MY_Controller{
+class Univ extends MY_Controller
+{
 	private $de_user_type = null;
 	public $super_check = false;
-	public function __construct(){
+
+	public function __construct()
+	{
 		parent::__construct();
 		$this->de_user_type = $this->encryption->decrypt($this->session->userdata('user_type'));
 		// 관리자인지 확인
 		$this->_check_security_master($this->de_user_type, $this->encryption->decrypt($this->session->userdata('user_id')));
-		if($this->de_user_type === HOME_PREFIX."superMaster"){
+		if ($this->de_user_type === HOME_PREFIX."superMaster") {
 			$this->super_check = true;
 		}
 		$this->_check_security_master_lv(9);
@@ -16,19 +19,22 @@ class Univ extends MY_Controller{
 		$this->load->library('form_validation');
 		$this->load->model('univ_model');
 	}
-	public function index(){
+	public function index()
+	{
 		redirect(site_url().'homeAdm/qna/list', 'location', 302);
 	}
-	public function list($page=1){
+	public function list($page=1)
+	{
         $data = $this->_set_meta_data(array('title'=>'한국대 목록'));
 		$data['active'] 		= 'univ';
         $data['sub_active']     = 'univ_list';
         $data['univ_list']      = $this->univ_model->get_list('', true);
 		$this->_getPageLayout('univ_list', $data);
 	}
-    public function write($u_id=''){
+	public function write($u_id='')
+	{
 		$univ_result = false;
-		if(is_numeric($u_id)){
+		if (is_numeric($u_id)) {
 			$univ_result = $this->univ_model->get_univ($u_id);
 			$this->form_validation->set_rules('u_id', '', 'required|numeric');
 		}
@@ -42,11 +48,11 @@ class Univ extends MY_Controller{
 		$this->form_validation->set_rules('u_lng', '', 'required');
 		//$this->form_validation->set_rules('u_logo', '', 'required');
 		//$this->form_validation->set_rules('u_image', '', 'required');
-		if($this->form_validation->run() == false) {
+		if ($this->form_validation->run() == false) {
 			$data = $this->_set_meta_data(array('title'=>'한국대 등록'));
 			$data['active'] 		= 'univ';
 	        $data['sub_active']     = 'univ_write';
-			if($univ_result) $data['univ']	= $univ_result;
+			if ($univ_result) $data['univ']	= $univ_result;
 			$this->_getPageLayout((($univ_result)?'univ_modify':'univ_write'), $data);
 		} else {
 			$this->load->library('fileupload_new3');
@@ -60,7 +66,7 @@ class Univ extends MY_Controller{
 			$mode = $this->input->post('mode');
 			if ($mode=='modify') {
 				// 수정
-				if($this->univ_model->modify_univ($this->input->post(NULL, TRUE), $upload_result)){
+				if ($this->univ_model->modify_univ($this->input->post(NULL, TRUE), $upload_result)){
 					$this->session->set_flashdata('message', '수정완료');
 				}else{
 					$this->session->set_flashdata('message', 'MYSQL SERVER ERROR TRY AGAIN');
@@ -68,7 +74,7 @@ class Univ extends MY_Controller{
 				redirect(site_url().'homeAdm/univ/write/'.$this->input->post('u_id'));
 			} else {
 				// 새로 등록
-				if($this->univ_model->insert_univ($this->input->post(NULL, TRUE), $upload_result)){
+				if ($this->univ_model->insert_univ($this->input->post(NULL, TRUE), $upload_result)){
 					$this->session->set_flashdata('message', '등록완료');
 				}else{
 					$this->session->set_flashdata('message', 'MYSQL SERVER ERROR TRY AGAIN');
@@ -78,22 +84,23 @@ class Univ extends MY_Controller{
 		}
     }
 	// ckeditor 이미지파일업로드
-	public function upload_imgfile_ckeditor(){
+	public function upload_imgfile_ckeditor()
+	{
 		$config['upload_path'] = './assets/img/ckeditor/univ';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size'] = '1024';
 		$config['encrypt_name'] = TRUE;
 		$this->load->library('upload', $config);
-		if(!is_dir($config['upload_path'])){
+		if (!is_dir($config['upload_path'])) {
 			@mkdir($config['upload_path'], 0777, true);
 		}
-		if(! $this->upload->do_upload('upload')){
+		if (! $this->upload->do_upload('upload')) {
 			$error = $this->upload->display_errors('','');
 			echo "<script>alert('".$error."'); </script>";
 			$this->callback_ckeditor_upload_csrf();
 			echo $error;
 			return false;
-		}else{
+		} else {
 			$CHEditorFuncNum = $this->input->get('CKEditorFuncNum');
 			$data = $this->upload->data(); //array('upload_data'=>$this->upload->Data());
 			$filename = $data['file_name'];
@@ -112,12 +119,13 @@ class Univ extends MY_Controller{
 		}
 	}
 	// 관리자 페이지 셋팅
-	private function getPageLayout($page, $data, $another_path=false){
+	private function getPageLayout($page, $data, $another_path=false)
+	{
 		$data['check_adm_lv'] = $this->session->userdata('user_level');
 		$this->load->view('adm/header', $data);
-		if($another_path){
+		if ($another_path) {
 			$this->load->view($page, $data);
-		}else{
+		} else {
 			$this->load->view('adm/'.$page, $data);
 		}
 		$this->load->view('adm/footer', $data);

@@ -1,20 +1,24 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Umv extends MY_Controller {
-	public function __construct() {
+class Umv extends MY_Controller 
+{
+	public function __construct() 
+	{
 		parent::__construct();
 	}
-	public function _remap($method, $params = array()){
-		if (method_exists($this, $method)){
+
+	public function _remap($method, $params = array())
+	{
+		if (method_exists($this, $method)) {
 			return call_user_func_array(array($this, $method), $params);
-		}else{
+		} else {
 			$data = $this->set_home_base(strtolower(__CLASS__), strtolower($method), 'subheader-'.strtolower(__CLASS__));
 			$lang_use_page = array('minnesota', 'minnesota_intro', 'about', 'map');
-			if(in_array(strtolower($method), $lang_use_page)){
+			if (in_array(strtolower($method), $lang_use_page)) {
 				$this->lang->load('umv/'.strtolower($method), $this->homelanguage->lang_seting($this->umv_lang));
 				$data['lang_contents']		= $this->lang->line("contents");
 			}
-			if(strtolower($method) === 'minnesota_intro'){
+			if (strtolower($method) === 'minnesota_intro') {
 				$data['rank1']	= $this->minnesota_intro_ranking('rank1');
 				$data['rank2']	= $this->minnesota_intro_ranking('rank2');
 				$data['rank3']	= $this->minnesota_intro_ranking('rank3');
@@ -28,11 +32,15 @@ class Umv extends MY_Controller {
 			$this->load->view('include/footer', $data);
 		}
 	}
-	public function index(){
+
+	public function index()
+	{
 		redirect(site_url().$this->homelanguage->get_lang().'/umv/minnesota');
 	}
-	private function minnesota_intro_ranking($rank){
-		switch($rank){
+
+	private function minnesota_intro_ranking($rank)
+	{
+		switch ($rank) {
 			case 'rank1' :
 				return array(
 					'point'=>-1,
@@ -118,7 +126,9 @@ class Umv extends MY_Controller {
 			break;
 		}
 	}
-	private function nobel_list(){
+
+	private function nobel_list()
+	{
 		return array(
 			array(
 				'laureate' 		=> 'Bob Dylan',
